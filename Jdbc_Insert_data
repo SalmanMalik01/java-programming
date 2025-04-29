@@ -1,0 +1,42 @@
+package JDBC_DEMO;
+import java.sql.*;
+public class Insert_Data {
+	
+		public static void main(String[] args) throws ClassNotFoundException, SQLException {
+			
+			String Url="jdbc:mysql://localhost:3306/college2";
+			String Username="root";
+			String Password="Malik@1234";
+			String Quary="INSERT INTO student2(id,name,age) VALUES (104,'rubi',22);";
+			
+			
+			try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("successfully");
+			} catch(ClassNotFoundException e) {
+				System.out.println(e);	
+			} 
+			
+			try {
+			Connection con=DriverManager.getConnection(Url,Username,Password);
+			System.out.println("connection create");
+			Statement stmt=con.createStatement();
+			int rowaffected=stmt.executeUpdate(Quary);
+			
+			if(rowaffected>0) {
+				System.out.println("Insert successfull."+rowaffected+" row(s) affected.");
+			} else {
+				System.out.println("Insertion failed");
+			}
+			
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+			
+		}
+			
+		}
+
+	}
+
+
+
