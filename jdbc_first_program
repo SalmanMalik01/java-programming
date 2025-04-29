@@ -1,0 +1,46 @@
+package JDBC_DEMO;
+import java.sql.*;
+public class Jdbc_Demo11 {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		String Url="jdbc:mysql://localhost:3306/college2";
+		String Username="root";
+		String Password="Malik@1234";
+		String Quary="Select * from student2;";
+		
+		
+		try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		System.out.println("successfully");
+		} catch(ClassNotFoundException e) {
+			System.out.println(e);	
+		}
+		
+		try {
+		Connection con=DriverManager.getConnection(Url,Username,Password);
+		System.out.println("connection create");
+		Statement stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(Quary);
+		while(rs.next()) {
+			int id=rs.getInt("ID");
+			String name=rs.getString("name");
+			int age=rs.getInt("age");
+			System.out.println();
+			System.out.println("===================");
+			System.out.println("id   :"+id);
+			System.out.println("name :"+name);
+			System.out.println("age  :"+age);
+			
+		}
+		con.close();
+		rs.close();
+		stmt.close();
+		
+	}catch(SQLException e) {
+		System.out.println(e.getMessage());
+		
+	}
+		
+	}
+
+}
