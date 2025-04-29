@@ -1,101 +1,88 @@
-package com.java.ATM_machine;
+package AMT_Machine2;
 
 import java.util.Scanner;
 
-class ATM{
+class AMT{
 	
-	float Balance;
-    int PIN=8800;
+	Scanner sc =new Scanner(System.in);
 	
-	public void checkpin() {
-		System.out.println("Enter pin: ");
-		Scanner sc=new Scanner(System.in);
+	float balance;
+	static int PIN=8899;
+	
+	
+	 AMT() {
+		
+		System.out.print("Enter pin: ");
+		try {
 		int pin=sc.nextInt();
-		if(pin==PIN) {
+		if(PIN==pin) {
 			menu();
-		} else {
-			System.out.println("Invalid PIN");
-			checkpin();
+		}else {
+			System.out.println("Invalid Pin! Try Again...");
+			
+		}
+		}catch(Exception e) {
+			System.out.println("Invalid Pin! Try Again...");
 		}
 	}
 	
 	
 	public void menu() {
-		System.out.println("1.Check A/C Balance");
-		System.out.println("2.Withrow Money");
-		System.out.println("3.Deposite Money");
-		System.out.println("4.Exit");
-		Scanner sc=new Scanner(System.in);
-		int opt= sc.nextInt();
-
+		System.out.println();
+		System.out.println("****************** Main Menu **********************");
+		System.out.println("1.Deposite Amount            2.Withdrol Amount");
+		System.out.println("3.Check A/c Balance          4.Exit");
+		System.out.println();
+		int opt=sc.nextInt();
 		
-		if(opt==1) {
-			checkbalance();
-			
-		}else if(opt==2) {
-			Withdrow();
-			
-		}else if(opt==3) {
-			deposite();
-			
-		}else if(opt==4) {
-			returns ();
-		} else {
-			System.out.println("Invalid Input");
+		switch(opt) {
+		
+		case 1: depositeAmount();
+		menu();
+		case 2: withdrolAmount();
+		menu();
+		case 3: checkBalance();
+		menu();
+		case 4: System.out.println("Thank you:)");;
+		break;
+		
 		}
 		
 	}
 	
-	
-	
-	public void checkbalance(){
-	 System.out.println("Balance: "+Balance);	
+	void depositeAmount() {
+		System.out.print("Enter Amount to Deposite: ");
+		float Amount=sc.nextFloat();
+		balance=balance+Amount;
+		System.out.println("Amount Deposite successfully");
 		menu();
-	}
-	
-	public void Withdrow() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter amount to withdrow: ");
-		int amt=sc.nextInt();
 		
-		if(amt>Balance) {
-			System.out.println("Insufficient Amount");
-			menu();
-		} else {
-			Balance=Balance-amt;
-			System.out.println("Withdrow Successfuly");
-			System.out.println("Remaining Amount: "+Balance);
-			
-			menu();
-		}
 	}
 	
-	public void deposite() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter amount to Deposite: ");
-		int amt=sc.nextInt();
-		Balance=Balance+amt;
-		System.out.println("Deposited Successfuly");
-		System.out.println("After deposite Amount: "+Balance);
+	void withdrolAmount(){
+		System.out.print("Enter Amount to withdrol: ");
+		float Amount=sc.nextFloat();
+		if(balance<Amount) {
+			System.out.println("Insufficient balance");
+			menu();
+		}else{
+		balance=balance-Amount;
+		System.out.println("Amount Withdrol successfully");
 		menu();
 	}
-	
-	public void returns() {
-		System.out.println("Thank you :)");
 	}
-	 
-	
-	
+	void checkBalance() {
+		System.out.println("Balance "+balance);
+		menu();
+	}
 }
 
 
-
-public class ATM_Machine {
-
+public class AMT_machine2 {
 	public static void main(String[] args) {
-
-		ATM amt=new ATM();
-		amt.checkpin();
-		
+		AMT a1=new AMT();
+	
+	
 	}
+	
 }
