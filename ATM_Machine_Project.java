@@ -7,27 +7,37 @@ class AMT{
 	Scanner sc =new Scanner(System.in);
 	
 	float balance;
-	static int PIN=8899;
+	static String PIN="8899";
+	int attempts=0;
+	String pin;
 	
-	
-	 AMT() {
+
+	 AMT() throws InterruptedException { 
+		 
+		while(attempts<3) {
+		System.out.print("Enter your pin: ");
 		
-		System.out.print("Enter pin: ");
-		try {
-		int pin=sc.nextInt();
-		if(PIN==pin) {
+		 pin=sc.next();
+		
+		if(PIN.equalsIgnoreCase(pin)) {
 			menu();
+			break;
 		}else {
-			System.out.println("Invalid Pin! Try Again...");
+			attempts++;
+			 System.out.println("Incorrect PIN. Attempt " + attempts + " of 3.");
+		} 
+
+        if (attempts == 3) {
+            System.out.println("Your card is blocked for 24 hours.");
+        }else {
+        	}
+      
+		}
 			
-		}
-		}catch(Exception e) {
-			System.out.println("Invalid Pin! Try Again...");
-		}
 	}
+		
 	
-	
-	public void menu() {
+	public void menu() throws InterruptedException {
 		System.out.println();
 		System.out.println("****************** Main Menu **********************");
 		System.out.println("1.Deposite Amount            2.Withdrol Amount");
@@ -43,14 +53,14 @@ class AMT{
 		menu();
 		case 3: checkBalance();
 		menu();
-		case 4: System.out.println("Thank you:)");;
-		break;
+		case 4: exit();
+		
 		
 		}
 		
 	}
 	
-	void depositeAmount() {
+	void depositeAmount() throws InterruptedException {
 		System.out.print("Enter Amount to Deposite: ");
 		float Amount=sc.nextFloat();
 		balance=balance+Amount;
@@ -59,7 +69,7 @@ class AMT{
 		
 	}
 	
-	void withdrolAmount(){
+	void withdrolAmount() throws InterruptedException{
 		System.out.print("Enter Amount to withdrol: ");
 		float Amount=sc.nextFloat();
 		if(balance<Amount) {
@@ -71,15 +81,29 @@ class AMT{
 		menu();
 	}
 	}
-	void checkBalance() {
+	void checkBalance() throws InterruptedException {
 		System.out.println("Balance "+balance);
 		menu();
+	}
+	
+	void exit() throws InterruptedException{
+		System.out.print("Thank you!!! Closing");
+		Thread.sleep(1000);
+		System.out.print(".");
+		Thread.sleep(1000);
+		System.out.print(".");
+		Thread.sleep(1000);
+		System.out.print(".");
+		Thread.sleep(1000);
+		System.out.print(".");
+		
 	}
 }
 
 
+
 public class AMT_machine2 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		AMT a1=new AMT();
 	
 	
